@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Payment } from 'src/payments/payment.entity';
-import { Expense } from 'src/expenses/expense.entity';
-import { Student } from 'src/students/student.entity';
+import { Payment } from '../payments/payment.entity';
+import { Expense } from '../expenses/expense.entity';
+import { Student } from '../students/student.entity';
 
 function parseDate(dateStr: string) {
   const [year, month, day] = dateStr.split('-').map(Number);
@@ -29,7 +29,6 @@ export class IndicatorsService {
 
     const paymentsThisMonth = payments.filter((p) => {
       const due = parseDate(p.due_date);
-      console.log(due.getMonth(), month);
 
       return due.getMonth() + 1 === month && due.getFullYear() === year;
     });

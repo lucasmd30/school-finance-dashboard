@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from '@nestjs/config'; // <- necessário
+import { ConfigModule } from '@nestjs/config';
 
 import { Student } from './students/student.entity';
 import { Payment } from './payments/payment.entity';
@@ -9,7 +9,7 @@ import { Expense } from './expenses/expense.entity';
 import { StudentsModule } from './students/student.module';
 import { PaymentsModule } from './payments/payment.module';
 import { ExpensesModule } from './expenses/expense.module';
-import { IndicatorsModule } from 'src/indicators/indicators.module';
+import { IndicatorsModule } from './indicators/indicators.module';
 
 @Module({
   imports: [
