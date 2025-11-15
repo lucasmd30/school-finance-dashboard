@@ -1,63 +1,93 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { MetricCard } from "@/components/dashboard/MetricCard";
+import { t } from "@/lib/theme";
+import {
+  DollarSign,
+  AlertCircle,
+  TrendingDown,
+  Users,
+  Clock,
+  CreditCard,
+} from "lucide-react";
+
+import { cn } from "@/lib/utils";
+
+export default function Page() {
+  const receitaTotal = "R$ 125.000,00";
+  const valorEmAberto = "R$ 18.500,00";
+  const inadimplencia = "14.8%";
+  const receitaMediaPorAluno = "R$ 850,00";
+  const tempoMedioAtraso = "12 dias";
+  const despesasTotal = "R$ 78.000,00";
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className={cn("min-h-screen", t("bg-background"))}>
+      <header className={cn(t("bg-card"), "border-b", t("border-border"))}>
+        <div className="container mx-auto px-4 py-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className={cn("text-3xl font-bold", t("text-card"))}>
+                Dashboard Financeiro
+              </h1>
+              <p className={cn(t("text-muted"), "mt-1")}>
+                Visão geral das finanças da escola
+              </p>
+            </div>
+            <div className="text-right">
+              <p className={cn("text-sm", t("text-muted"))}>Período atual</p>
+              <p className={cn("text-lg font-semibold", t("text-card"))}>
+                Novembro 2025
+              </p>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </header>
+
+      <main className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <MetricCard
+            title="Receita Total do Mês"
+            value={receitaTotal}
+            icon={DollarSign}
+            variant="success"
+            description="Maio 2024"
+          />
+          <MetricCard
+            title="Valor Total em Aberto"
+            value={valorEmAberto}
+            icon={AlertCircle}
+            variant="warning"
+            description="Pagamentos pendentes"
+          />
+          <MetricCard
+            title="Percentual de Inadimplência"
+            value={inadimplencia}
+            icon={TrendingDown}
+            variant="destructive"
+            description="Alunos com atraso"
+          />
+          <MetricCard
+            title="Receita Média por Aluno"
+            value={receitaMediaPorAluno}
+            icon={Users}
+            variant="success"
+            description="147 alunos ativos"
+          />
+          <MetricCard
+            title="Tempo Médio de Atraso"
+            value={tempoMedioAtraso}
+            icon={Clock}
+            variant="warning"
+            description="Pagamentos em atraso"
+          />
+          <MetricCard
+            title="Controle de Despesas"
+            value={despesasTotal}
+            icon={CreditCard}
+            variant="destructive"
+            description="Mês atual"
+          />
         </div>
       </main>
     </div>
