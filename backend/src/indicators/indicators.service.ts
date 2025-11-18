@@ -19,7 +19,8 @@ export class IndicatorsService {
   ) {}
 
   async getIndicators() {
-    const now = new Date();
+    const now = new Date(2025, 10, 20);
+
     const month = now.getMonth() + 1;
     const year = now.getFullYear();
 
@@ -29,7 +30,6 @@ export class IndicatorsService {
 
     const paymentsThisMonth = payments.filter((p) => {
       const due = parseDate(p.due_date);
-
       return due.getMonth() + 1 === month && due.getFullYear() === year;
     });
 
@@ -46,17 +46,22 @@ export class IndicatorsService {
     ).length;
 
     const inadimplencyRate =
-      students.length > 0 ? (delinquent / students.length) * 100 : 0;
+      students.length > 0 ? delinquent / students.length : 0;
 
     const avgRevenuePerStudent =
       students.length > 0 ? totalRevenue / students.length : 0;
 
     const avgDelayDaysArray = payments
-      .filter((p) => p.status === 'late' && p.paid_date !== null)
+      .filter((p) => p.status === 'late')
       .map((p) => {
-        const paid = parseDate(p.paid_date!);
         const due = parseDate(p.due_date);
-        return (paid.getTime() - due.getTime()) / (1000 * 60 * 60 * 24);
+
+        if (p.paid_date) {
+          const paid = parseDate(p.paid_date);
+          return (paid.getTime() - due.getTime()) / (1000 * 60 * 60 * 24);
+        }
+
+        return (now.getTime() - due.getTime()) / (1000 * 60 * 60 * 24);
       });
 
     const avgDelayDays =
@@ -71,12 +76,12 @@ export class IndicatorsService {
     );
 
     return {
-      totalRevenue,
-      totalPending,
-      inadimplencyRate,
-      avgRevenuePerStudent,
-      avgDelayDays,
-      totalExpenses,
+      totalRevenue: totalRevenue,
+      totalPending: totalPending,
+      inadimplencyRate: inadimplencyRate,
+      avgRevenuePerStudent: avgRevenuePerStudent,
+      avgDelayDays: avgDelayDays,
+      totalExpenses: totalExpenses,
     };
   }
 }
