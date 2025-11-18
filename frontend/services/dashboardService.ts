@@ -22,7 +22,7 @@ export type Indicators = {
 
 export async function getIndicators(): Promise<Indicators> {
   const { data } = await api.get<IndicatorsResponse>("/indicators");
-
+  console.log(data);
   return {
     receitaTotal: data.totalRevenue,
     valorEmAberto: data.totalPending,
