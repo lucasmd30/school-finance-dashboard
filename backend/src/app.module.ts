@@ -1,10 +1,37 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
+
+import { Student } from './students/student.entity';
+import { Payment } from './payments/payment.entity';
+import { Expense } from './expenses/expense.entity';
+
+import { StudentsModule } from './students/student.module';
+import { PaymentsModule } from './payments/payment.module';
+import { ExpensesModule } from './expenses/expense.module';
+import { IndicatorsModule } from './indicators/indicators.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: process.env.DB_HOST,
+      port: Number(process.env.DB_PORT),
+      username: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      database: process.env.DB_NAME,
+      synchronize: true,
+      entities: [Student, Payment, Expense],
+    }),
+
+    StudentsModule,
+    PaymentsModule,
+    ExpensesModule,
+    IndicatorsModule,
+  ],
 })
 export class AppModule {}

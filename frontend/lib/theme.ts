@@ -1,0 +1,45 @@
+export const theme = {
+  "bg-background": "bg-[hsl(var(--background))]",
+  "bg-foreground": "bg-[hsl(var(--foreground))]",
+  "bg-card": "bg-[hsl(var(--card))]",
+  "bg-card-foreground": "bg-[hsl(var(--card-foreground))]",
+  "bg-primary": "bg-[hsl(var(--primary))]",
+  "bg-primary-foreground": "bg-[hsl(var(--primary-foreground))]",
+  "bg-secondary": "bg-[hsl(var(--secondary))]",
+  "bg-secondary-foreground": "bg-[hsl(var(--secondary-foreground))]",
+  "bg-muted": "bg-[hsl(var(--muted))]",
+  "bg-muted-foreground": "bg-[hsl(var(--muted-foreground))]",
+  "bg-accent": "bg-[hsl(var(--accent))]",
+  "bg-accent-foreground": "bg-[hsl(var(--accent-foreground))]",
+  "bg-success": "bg-[hsl(var(--success))]",
+  "bg-success-foreground": "bg-[hsl(var(--success-foreground))]",
+  "bg-warning": "bg-[hsl(var(--warning))]",
+  "bg-warning-foreground": "bg-[hsl(var(--warning-foreground))]",
+  "bg-destructive": "bg-[hsl(var(--destructive))]",
+  "bg-destructive-foreground": "bg-[hsl(var(--destructive-foreground))]",
+
+  "text-foreground": "text-[hsl(var(--foreground))]",
+  "text-background": "text-[hsl(var(--background))]",
+  "text-card": "text-[hsl(var(--card-foreground))]",
+  "text-primary": "text-[hsl(var(--primary-foreground))]",
+  "text-secondary": "text-[hsl(var(--secondary-foreground))]",
+  "text-muted": "text-[hsl(var(--muted-foreground))]",
+  "text-accent": "text-[hsl(var(--accent-foreground))]",
+  "text-success": "text-[hsl(var(--success-foreground))]",
+  "text-warning": "text-[hsl(var(--warning-foreground))]",
+  "text-destructive": "text-[hsl(var(--destructive-foreground))]",
+
+  "border-border": "border-[hsl(var(--border))]",
+  "border-primary": "border-[hsl(var(--primary))]",
+  "border-success": "border-[hsl(var(--success))]",
+  "border-warning": "border-[hsl(var(--warning))]",
+  "border-destructive": "border-[hsl(var(--destructive))]",
+
+  "icon-primary": "bg-[hsl(var(--primary))]/10 text-[hsl(var(--primary))]",
+  "icon-success": "bg-[hsl(var(--success))]/10 text-[hsl(var(--success))]",
+  "icon-warning": "bg-[hsl(var(--warning))]/10 text-[hsl(var(--warning))]",
+  "icon-destructive":
+    "bg-[hsl(var(--destructive))]/10 text-[hsl(var(--destructive))]",
+} as const;
+
+export const t = (key: keyof typeof theme) => theme[key];
